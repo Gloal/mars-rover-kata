@@ -13,7 +13,7 @@ public class MarsRover {
                 left_count++;
             }
         }
-        char finalDirection = right_count - left_count > 0? turnRight(right_count%4) : turnLeft(left_count%4);
+        char finalDirection = right_count - left_count > 0? turnRight((right_count-left_count)%4) : turnLeft((left_count-right_count)%4);
 
         return "00"+finalDirection;
     }
@@ -36,8 +36,22 @@ public class MarsRover {
         return direction;
     }
 
-    public char turnRight(int numOfTurns){
-        return 'E';
+    private static char turnRight(int numOfTurns) {
+        char direction = 'N';
+        switch( numOfTurns){
+            case 1:
+                direction = 'E';
+                break;
+            case 2:
+                direction = 'S';
+                break;
+            case 3:
+                direction = 'W';
+                break;
+            default:
+
+        }
+        return direction;
     }
 
 

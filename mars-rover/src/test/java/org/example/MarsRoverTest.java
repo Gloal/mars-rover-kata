@@ -17,9 +17,18 @@ public class MarsRoverTest {
             "00L, 00W",
             "00R, 00E",
             "00LL, 00S",
-            "00LLLLLLL, 00E"
+            "00LLLLLLL, 00E",
+            "00LLLLLLLL, 00N",
+            "00RRRR, 00N",
+            "00RR, 00S",
+            "00RRR, 00W",
+            "00RRRRRRR, 00W",
+            "00RLRLRLRLR, 00E",
+            "00RLRLRLRLRLLLL, 00E",
+            "00RLRLRLRL, 00N"
+
     })
-    void turnsLeftOrRight_WhenGivenDirections(String directions, String expectedPosition){
+    void returnsFinalPosition_WhenGivenLeftOrRIghtDirections(String directions, String expectedPosition){
         String actualPosition = rover.move(directions);
         assertEquals(expectedPosition, actualPosition);
     }
