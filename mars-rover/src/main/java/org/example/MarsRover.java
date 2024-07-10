@@ -2,26 +2,26 @@ package org.example;
 
 public class MarsRover {
 
-    char[] defaultInitialDirection = new char[3];
+    char[] defaultInitialPosition = new char[]{0, 0, 'N'};
 
     public char[] move(char[] startingPoint, char[] moveCommand) {
-        int rightCount = 0;
-        int leftCount = 0;
-        int forwardCount = 0;
+        int rightCount = 0, leftCount = 0, forwardCount = 0;
         for (char c : moveCommand) {
             if (c == 'R') {
                 rightCount++;
             } else if (c == 'L') {
                 leftCount++;
-            }else if(c == 'F'){
+            } else if (c == 'F') {
                 forwardCount++;
+            } else if (c == 'B') {
+                forwardCount--;
             }
         }
         char finalDirection = rightCount - leftCount > 0 ?
                 turnRight((rightCount - leftCount) % 4)
                 : turnLeft((leftCount - rightCount) % 4);
 
-        return forwardCount >0? ("1"+finalDirection).toCharArray():("0" + finalDirection).toCharArray();
+        return (forwardCount + "" + finalDirection).toCharArray();
     }
 
     private static char turnLeft(int numOfTurns) {
@@ -59,11 +59,5 @@ public class MarsRover {
         }
         return direction;
     }
-
-    private static char moveForward(int numOfMoves) {
-        return '1';
-    }
-
-
 }
 

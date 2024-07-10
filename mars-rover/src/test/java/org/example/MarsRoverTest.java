@@ -15,7 +15,7 @@ public class MarsRoverTest {
     @BeforeEach
     void SetUp() {
         rover = new MarsRover();
-        initialPosition = new char[]{0,0,'N'};
+        initialPosition = new char[]{0, 0, 'N'};
 
 
     }
@@ -42,8 +42,10 @@ public class MarsRoverTest {
     }
 
     @Test
-    void movesOnePositionForward_WhenGivenXDirections(){
-        assertArrayEquals("1N".toCharArray(), rover.move(initialPosition,new char[]{'F','N'}));
+    void movesForwardOrBackward_WhenGivenDirections() {
+        assertArrayEquals("1N".toCharArray(), rover.move(initialPosition, new char[]{'F', 'N'}));
+        assertArrayEquals("-1N".toCharArray(), rover.move(initialPosition, new char[]{'B', 'N'}));
+
     }
 
 
