@@ -48,5 +48,25 @@ public class MarsRoverTest {
 
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "B,-1N",
+            "LBBBBB, -5W",
+            "R, 0E",
+            "FLL, 1S",
+            "FFLLLLLLFL, 3E",
+            "BLLLLBFBLLLL, -2N",
+            "BRRRR, -1N",
+            "RRFFFFFFFBBB, 4S",
+            "BRRR, -1W",
+            "BBRRRRRRRFF, 0W",
+            "FRLRLRLRLR, 1E",
+
+    })
+    void returnsFinalPosition_WhenGivenLeftOrRightAndFowardOrBackwardDirections(String directions, String expectedPosition) {
+        char[] actualPosition = rover.move(initialPosition, directions.toCharArray());
+        assertArrayEquals(expectedPosition.toCharArray(), actualPosition);
+    }
+
 
 }

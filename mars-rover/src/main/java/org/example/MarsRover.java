@@ -21,7 +21,7 @@ public class MarsRover {
                 turnRight((rightCount - leftCount) % 4)
                 : turnLeft((leftCount - rightCount) % 4);
 
-        return (forwardCount + "" + finalDirection).toCharArray();
+        return (Integer.toString(forwardCount) + finalDirection).toCharArray();
     }
 
     private static char turnLeft(int numOfTurns) {
