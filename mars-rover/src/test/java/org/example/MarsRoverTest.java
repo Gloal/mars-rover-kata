@@ -17,18 +17,18 @@ public class MarsRoverTest {
 
     @ParameterizedTest
     @CsvSource({
-            "0L, 0W",
-            "0R, 0E",
-            "0LL, 0S",
-            "0LLLLLLL, 0E",
-            "0LLLLLLLL, 0N",
-            "0RRRR, 0N",
-            "0RR, 0S",
-            "0RRR, 0W",
-            "0RRRRRRR, 0W",
-            "0RLRLRLRLR, 0E",
-            "0RLRLRLRLRLLLL, 0E",
-            "0RLRLRLRL, 0N"
+            "0L, 00W",
+            "0R, 00E",
+            "0LL, 00S",
+            "0LLLLLLL, 00E",
+            "0LLLLLLLL, 00N",
+            "0RRRR, 00N",
+            "0RR, 00S",
+            "0RRR, 00W",
+            "0RRRRRRR, 00W",
+            "0RLRLRLRLR, 00E",
+            "0RLRLRLRLRLLLL, 00E",
+            "0RLRLRLRL, 00N"
 
     })
     void move_LeftOrRightFromNorth_ShouldReturnCorrectFinalDirection(String directions, String expectedPosition) {
@@ -38,9 +38,9 @@ public class MarsRoverTest {
 
     @ParameterizedTest
     @CsvSource({
-            "0L, 0N",
-            "0R, 0S",
-            "0LL, 0W",
+            "0L, 00N",
+            "0R, 00S",
+            "0LL, 00W",
 
     })
     void move_LeftAndRightFromEast_ShouldReturnCorrectFinalDirection(String directions, String expectedPosition) {
@@ -51,24 +51,23 @@ public class MarsRoverTest {
 
     @Test
     void move_ForwardOrBackward_ShouldReturnCorrectFinalDirection() {
-        assertArrayEquals("1N".toCharArray(), rover.move(new char[]{'F', 'N'}));
-        assertArrayEquals("-1N".toCharArray(), rover.move(new char[]{'B', 'N'}));
+        assertArrayEquals("02N".toCharArray(), rover.move(new char[]{'F', 'F'}));
+        assertArrayEquals("02N".toCharArray(), rover.move(new char[]{'B', 'F'}));
     }
 
     @ParameterizedTest
     @CsvSource({
-            "B,-1N",
-            "LBBBBB, -5W",
-            "R, 0E",
-            "FLL, 1S",
-            "FFLLLLLLFL, 3E",
-            "BLLLLBFBLLLL, -2N",
-            "BRRRR, -1N",
-            "RRFFFFFFFBBB, 4S",
-            "BRRR, -1W",
-            "BBRRRRRRRFF, 0W",
-            "FRLRLRLRLR, 1E",
-
+            "B,0-1N",
+            "LBBBBB, 50W",
+            "R, 00E",
+            "FLL, 01S",
+            "FFLLLLLLFL, 01E",
+            "BLLLLBFBLLLL, 0-2N",
+            "BRRRR, 0-1N",
+            "RFFFFFFFBBB, 40E",
+            "BRRR, 0-1W",
+            "BBRRRRRRRFF, -2-2W",
+            "RFLRLRLRLR, 10E",
     })
     void move_LeftOrRightAndForwardOrBackward_shouldReturnCorrectDirection(String directions, String expectedPosition) {
         char[] actualPosition = rover.move(directions.toCharArray());
