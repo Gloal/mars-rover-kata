@@ -7,15 +7,14 @@ public class MarsRover {
     private char direction;
 
 
-    MarsRover(int x, int y, char direction) {
+    public MarsRover(int x, int y, char direction) {
         this.initialPosition = new Position(x, y);
         this.currentPosition = new Position(x, y);
         this.direction = direction;
 
     }
 
-
-    public char[] move(char[] moveCommand) {
+    public String move(char[] moveCommand) {
         for (char c : moveCommand) {
             if (c == 'R') {
                 turnRight();
@@ -30,7 +29,7 @@ public class MarsRover {
 
         String finalX = Integer.toString(this.currentPosition.x);
         String finalY = Integer.toString(this.currentPosition.y);
-        return (finalX + finalY + this.direction).toCharArray();
+        return (finalX + finalY + this.direction);
     }
 
     private void moveBackward() {

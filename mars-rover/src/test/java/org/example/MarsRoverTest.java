@@ -31,8 +31,8 @@ public class MarsRoverTest {
             "0RLRLRLRL, 00N"
     })
     void move_LeftOrRightFromNorth_ShouldReturnCorrectFinalDirection(String directions, String expectedPosition) {
-        char[] actualPosition = rover.move(directions.toCharArray());
-        assertArrayEquals(expectedPosition.toCharArray(), actualPosition);
+        String actualPosition = rover.move(directions.toCharArray());
+        assertEquals(expectedPosition, actualPosition);
     }
 
     @ParameterizedTest
@@ -44,14 +44,14 @@ public class MarsRoverTest {
     })
     void move_LeftAndRightFromEast_ShouldReturnCorrectFinalDirection(String directions, String expectedPosition) {
         rover = new MarsRover(0, 0, 'E');
-        char[] actualPosition = rover.move(directions.toCharArray());
-        assertArrayEquals(expectedPosition.toCharArray(), actualPosition);
+        String actualPosition = rover.move(directions.toCharArray());
+        assertEquals(expectedPosition, actualPosition);
     }
 
     @Test
     void move_ConsecutiveForwardOrBackward_ShouldReturnCorrectFinalDirection() {
-        assertArrayEquals("02N".toCharArray(), rover.move(new char[]{'F', 'F'}));
-        assertArrayEquals("02N".toCharArray(), rover.move(new char[]{'B', 'F'}));
+        assertEquals("02N", rover.move(new char[]{'F', 'F'}));
+        assertEquals("02N", rover.move(new char[]{'B', 'F'}));
     }
 
     @ParameterizedTest
@@ -69,14 +69,14 @@ public class MarsRoverTest {
             "RFLRLRLRLR, 10E",
     })
     void move_LeftOrRightAndForwardOrBackward_shouldReturnCorrectPositionAndDirection(String directions, String expectedPosition) {
-        char[] actualPosition = rover.move(directions.toCharArray());
-        assertArrayEquals(expectedPosition.toCharArray(), actualPosition);
+        String actualPosition = rover.move(directions.toCharArray());
+        assertEquals(expectedPosition, actualPosition);
     }
 
     @Test
     void move_ConsecutiveLeftOrRightAndForwardOrBackward_shouldReturnCorrectPosition() {
-        assertArrayEquals("02S".toCharArray(), rover.move(new char[]{'F', 'F','L','L'}));
-        assertArrayEquals("02S".toCharArray(), rover.move(new char[]{'B', 'F', 'R', 'L'}));
+        assertEquals("02S", rover.move(new char[]{'F', 'F','L','L'}));
+        assertEquals("02S", rover.move(new char[]{'B', 'F', 'R', 'L'}));
     }
 
 }
