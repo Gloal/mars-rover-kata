@@ -29,7 +29,6 @@ public class MarsRoverTest {
             "0RLRLRLRLR, 00E",
             "0RLRLRLRLRLLLL, 00E",
             "0RLRLRLRL, 00N"
-
     })
     void move_LeftOrRightFromNorth_ShouldReturnCorrectFinalDirection(String directions, String expectedPosition) {
         char[] actualPosition = rover.move(directions.toCharArray());
@@ -50,7 +49,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    void move_ForwardOrBackward_ShouldReturnCorrectFinalDirection() {
+    void move_ConsecutiveForwardOrBackward_ShouldReturnCorrectFinalDirection() {
         assertArrayEquals("02N".toCharArray(), rover.move(new char[]{'F', 'F'}));
         assertArrayEquals("02N".toCharArray(), rover.move(new char[]{'B', 'F'}));
     }
@@ -69,12 +68,15 @@ public class MarsRoverTest {
             "BBRRRRRRRFF, -2-2W",
             "RFLRLRLRLR, 10E",
     })
-    void move_LeftOrRightAndForwardOrBackward_shouldReturnCorrectDirection(String directions, String expectedPosition) {
+    void move_LeftOrRightAndForwardOrBackward_shouldReturnCorrectPositionAndDirection(String directions, String expectedPosition) {
         char[] actualPosition = rover.move(directions.toCharArray());
         assertArrayEquals(expectedPosition.toCharArray(), actualPosition);
     }
 
-    void move_LeftOrRightAndForwardOrBackward_shouldReturnCorrectPosition(String directions, String expectedPosition) {
+    @Test
+    void move_ConsecutiveLeftOrRightAndForwardOrBackward_shouldReturnCorrectPosition() {
+        assertArrayEquals("02S".toCharArray(), rover.move(new char[]{'F', 'F','L','L'}));
+        assertArrayEquals("02S".toCharArray(), rover.move(new char[]{'B', 'F', 'R', 'L'}));
     }
 
 

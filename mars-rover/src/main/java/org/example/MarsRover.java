@@ -2,30 +2,25 @@ package org.example;
 
 public class MarsRover {
 
-    private final int[] initialPosition;
-    private int[] currentPosition;
-
-    private int currentYposition;
-    private int currentXPosition;
+    private final Position initialPosition;
+    private final Position currentPosition;
     private char direction;
 
 
-
-    MarsRover(int x, int y, char direction){
-        this.initialPosition = new int[]{x,y};
-        this.currentPosition = new int[2];
+    MarsRover(int x, int y, char direction) {
+        this.initialPosition = new Position(x, y);
+        this.currentPosition = new Position(x, y);
         this.direction = direction;
 
     }
 
 
     public char[] move(char[] moveCommand) {
-        int rightCount = 0, leftCount = 0, forwardCount = 0;
         for (char c : moveCommand) {
             if (c == 'R') {
-                turnRight(direction);
+                turnRight();
             } else if (c == 'L') {
-                turnLeft(direction);
+                turnLeft();
             } else if (c == 'F') {
                 moveForward();
             } else if (c == 'B') {
@@ -33,24 +28,24 @@ public class MarsRover {
             }
         }
 
-        String finalX = Integer.toString(this.currentPosition[0]);
-        String finalY = Integer.toString(this.currentPosition[1]);
+        String finalX = Integer.toString(this.currentPosition.x);
+        String finalY = Integer.toString(this.currentPosition.y);
         return (finalX + finalY + this.direction).toCharArray();
     }
 
     private void moveBackward() {
         switch (direction) {
             case 'N':
-                currentPosition[1]--;
+                currentPosition.y--;
                 break;
             case 'W':
-                currentPosition[0]++;
+                currentPosition.x++;
                 break;
             case 'S':
-                currentPosition[1]++;
+                currentPosition.y++;
                 break;
             case 'E':
-                currentPosition[0]--;
+                currentPosition.x--;
                 break;
         }
     }
@@ -58,22 +53,22 @@ public class MarsRover {
     private void moveForward() {
         switch (direction) {
             case 'N':
-                currentPosition[1]++;
+                currentPosition.y++;
                 break;
             case 'W':
-                currentPosition[0]--;
+                currentPosition.x--;
                 break;
             case 'S':
-                currentPosition[1]--;
+                currentPosition.y--;
                 break;
             case 'E':
-                currentPosition[0]++;
+                currentPosition.x++;
                 break;
         }
     }
 
-    private void turnLeft(char initialDirection) {
-        switch (initialDirection) {
+    private void turnLeft() {
+        switch (direction) {
             case 'N':
                 this.direction = 'W';
                 break;
@@ -89,8 +84,8 @@ public class MarsRover {
         }
     }
 
-    private void turnRight(char initialDirection) {
-        switch (initialDirection) {
+    private void turnRight() {
+        switch (direction) {
             case 'N':
                 this.direction = 'E';
                 break;
