@@ -2,28 +2,34 @@ package org.example;
 
 public class MarsRover {
 
-    char initialDirection = 'N';
-    public String move(String s) {
-        int right_count = 0;
-        int left_count = 0;
-        for(char c: s.toCharArray()) {
+    char[] defaultInitialDirection = new char[3];
+
+    public char[] move(char[] startingPoint, char[] moveCommand) {
+        int rightCount = 0;
+        int leftCount = 0;
+        int forwardCount = 0;
+        for (char c : moveCommand) {
             if (c == 'R') {
-                right_count++;
-            } else if (c == 'L'){
-                left_count++;
+                rightCount++;
+            } else if (c == 'L') {
+                leftCount++;
+            }else if(c == 'F'){
+                forwardCount++;
             }
         }
-        char finalDirection = right_count - left_count > 0? turnRight((right_count-left_count)%4) : turnLeft((left_count-right_count)%4);
+        char finalDirection = rightCount - leftCount > 0 ?
+                turnRight((rightCount - leftCount) % 4)
+                : turnLeft((leftCount - rightCount) % 4);
 
-        return "00"+finalDirection;
+        return forwardCount >0? ("1"+finalDirection).toCharArray():("0" + finalDirection).toCharArray();
     }
 
     private static char turnLeft(int numOfTurns) {
         char direction = 'N';
-        switch( numOfTurns){
+        switch (numOfTurns) {
             case 1:
-                 direction = 'W';
-                 break;
+                direction = 'W';
+                break;
             case 2:
                 direction = 'S';
                 break;
@@ -38,7 +44,7 @@ public class MarsRover {
 
     private static char turnRight(int numOfTurns) {
         char direction = 'N';
-        switch( numOfTurns){
+        switch (numOfTurns) {
             case 1:
                 direction = 'E';
                 break;
@@ -52,6 +58,10 @@ public class MarsRover {
 
         }
         return direction;
+    }
+
+    private static char moveForward(int numOfMoves) {
+        return '1';
     }
 
 
