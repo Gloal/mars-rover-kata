@@ -11,4 +11,10 @@ public class MarsRoverTest {
         MarsRover rover = new MarsRover();
         assertEquals("00E", rover.move("00R"));
     }
+
+    @Test
+    void turnsLeft_whenGivenDiretions(){
+        MarsRover rover = new MarsRover();
+        assertEquals("00W", rover.move("00L"));
+    }
 }
