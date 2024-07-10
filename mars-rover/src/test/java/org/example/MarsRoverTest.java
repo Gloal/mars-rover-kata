@@ -79,5 +79,4 @@ public class MarsRoverTest {
         assertArrayEquals("02S".toCharArray(), rover.move(new char[]{'B', 'F', 'R', 'L'}));
     }
 
-
 }
