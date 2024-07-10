@@ -3,11 +3,11 @@ package org.example;
 public class MarsRover {
 
     private final int[] initialPosition;
-    private final char initialDirection;
+    private char direction;
 
     MarsRover(int x, int y, char direction){
         this.initialPosition = new int[]{x,y};
-        this.initialDirection = direction;
+        this.direction = direction;
     }
 
 
@@ -15,56 +15,59 @@ public class MarsRover {
         int rightCount = 0, leftCount = 0, forwardCount = 0;
         for (char c : moveCommand) {
             if (c == 'R') {
-                rightCount++;
+                turnRight(direction);
             } else if (c == 'L') {
-                leftCount++;
+                turnLeft(direction);
             } else if (c == 'F') {
                 forwardCount++;
+                moveForward();
             } else if (c == 'B') {
                 forwardCount--;
+                moveBackward();
             }
         }
-        char finalDirection = rightCount - leftCount > 0 ?
-                turnRight((rightCount - leftCount) % 4)
-                : turnLeft((leftCount - rightCount) % 4);
 
-        return (Integer.toString(forwardCount) + finalDirection).toCharArray();
+        return (Integer.toString(forwardCount) + this.direction).toCharArray();
     }
 
-    private static char turnLeft(int numOfTurns) {
-        char direction = 'N';
-        switch (numOfTurns) {
-            case 1:
-                direction = 'W';
-                break;
-            case 2:
-                direction = 'S';
-                break;
-            case 3:
-                direction = 'E';
-                break;
-            default:
-
-        }
-        return direction;
+    private void moveBackward() {
     }
 
-    private static char turnRight(int numOfTurns) {
-        char direction = 'N';
-        switch (numOfTurns) {
-            case 1:
-                direction = 'E';
+    private void moveForward() {
+    }
+
+    private char turnLeft(char initialDirection) {
+        switch (initialDirection) {
+            case 'N':
+                this.direction = 'W';
                 break;
-            case 2:
-                direction = 'S';
+            case 'W':
+                this.direction = 'S';
                 break;
-            case 3:
-                direction = 'W';
+            case 'S':
+                this.direction = 'E';
                 break;
             default:
-
+                this.direction = 'N';
         }
-        return direction;
+        return this.direction;
+    }
+
+    private char turnRight(char initialDirection) {
+        switch (initialDirection) {
+            case 'N':
+                this.direction = 'E';
+                break;
+            case 'E':
+                this.direction = 'S';
+                break;
+            case 'S':
+                this.direction = 'W';
+                break;
+            default:
+                this.direction = 'N';
+        }
+        return this.direction;
     }
 }
 

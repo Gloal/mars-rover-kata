@@ -31,16 +31,28 @@ public class MarsRoverTest {
             "0RLRLRLRL, 0N"
 
     })
-    void returnsFinalPosition_WhenGivenLeftOrRightDirections(String directions, String expectedPosition) {
+    void move_LeftOrRightFromNorth_ShouldReturnCorrectFinalDirection(String directions, String expectedPosition) {
+        char[] actualPosition = rover.move(directions.toCharArray());
+        assertArrayEquals(expectedPosition.toCharArray(), actualPosition);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "0L, 0N",
+            "0R, 0S",
+            "0LL, 0W",
+
+    })
+    void move_LeftAndRightFromEast_ShouldReturnCorrectFinalDirection(String directions, String expectedPosition) {
+        rover = new MarsRover(0, 0, 'E');
         char[] actualPosition = rover.move(directions.toCharArray());
         assertArrayEquals(expectedPosition.toCharArray(), actualPosition);
     }
 
     @Test
-    void movesForwardOrBackward_WhenGivenDirections() {
+    void move_ForwardOrBackward_ShouldReturnCorrectFinalDirection() {
         assertArrayEquals("1N".toCharArray(), rover.move(new char[]{'F', 'N'}));
         assertArrayEquals("-1N".toCharArray(), rover.move(new char[]{'B', 'N'}));
-
     }
 
     @ParameterizedTest
@@ -58,9 +70,12 @@ public class MarsRoverTest {
             "FRLRLRLRLR, 1E",
 
     })
-    void returnsFinalPosition_WhenGivenLeftOrRightAndFowardOrBackwardDirections(String directions, String expectedPosition) {
+    void move_LeftOrRightAndForwardOrBackward_shouldReturnCorrectDirection(String directions, String expectedPosition) {
         char[] actualPosition = rover.move(directions.toCharArray());
         assertArrayEquals(expectedPosition.toCharArray(), actualPosition);
+    }
+
+    void move_LeftOrRightAndForwardOrBackward_shouldReturnCorrectPosition(String directions, String expectedPosition) {
     }
 
 
