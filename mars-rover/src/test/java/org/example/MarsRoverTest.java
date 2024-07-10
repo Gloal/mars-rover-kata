@@ -9,15 +9,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MarsRoverTest {
     private MarsRover rover;
-    private char[] initialPosition;
-
 
     @BeforeEach
     void SetUp() {
-        rover = new MarsRover();
-        initialPosition = new char[]{0, 0, 'N'};
-
-
+        rover = new MarsRover(0, 0, 'N');
     }
 
     @ParameterizedTest
@@ -37,14 +32,14 @@ public class MarsRoverTest {
 
     })
     void returnsFinalPosition_WhenGivenLeftOrRightDirections(String directions, String expectedPosition) {
-        char[] actualPosition = rover.move(initialPosition, directions.toCharArray());
+        char[] actualPosition = rover.move(directions.toCharArray());
         assertArrayEquals(expectedPosition.toCharArray(), actualPosition);
     }
 
     @Test
     void movesForwardOrBackward_WhenGivenDirections() {
-        assertArrayEquals("1N".toCharArray(), rover.move(initialPosition, new char[]{'F', 'N'}));
-        assertArrayEquals("-1N".toCharArray(), rover.move(initialPosition, new char[]{'B', 'N'}));
+        assertArrayEquals("1N".toCharArray(), rover.move(new char[]{'F', 'N'}));
+        assertArrayEquals("-1N".toCharArray(), rover.move(new char[]{'B', 'N'}));
 
     }
 
@@ -64,7 +59,7 @@ public class MarsRoverTest {
 
     })
     void returnsFinalPosition_WhenGivenLeftOrRightAndFowardOrBackwardDirections(String directions, String expectedPosition) {
-        char[] actualPosition = rover.move(initialPosition, directions.toCharArray());
+        char[] actualPosition = rover.move(directions.toCharArray());
         assertArrayEquals(expectedPosition.toCharArray(), actualPosition);
     }
 

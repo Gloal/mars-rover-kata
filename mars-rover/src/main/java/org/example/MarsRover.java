@@ -2,9 +2,16 @@ package org.example;
 
 public class MarsRover {
 
-    char[] defaultInitialPosition = new char[]{0, 0, 'N'};
+    private final int[] initialPosition;
+    private final char initialDirection;
 
-    public char[] move(char[] startingPoint, char[] moveCommand) {
+    MarsRover(int x, int y, char direction){
+        this.initialPosition = new int[]{x,y};
+        this.initialDirection = direction;
+    }
+
+
+    public char[] move(char[] moveCommand) {
         int rightCount = 0, leftCount = 0, forwardCount = 0;
         for (char c : moveCommand) {
             if (c == 'R') {
