@@ -2,19 +2,16 @@ package org.example;
 
 public class MarsRover {
 
-    private final Position initialPosition;
-    private final Position currentPosition;
-    private char direction;
-
+    private final RoverPosition initialPosition;
+    private final RoverPosition currentPosition;
 
     public MarsRover(int x, int y, char direction) {
-        this.initialPosition = new Position(x, y);
-        this.currentPosition = new Position(x, y);
-        this.direction = direction;
+        this.initialPosition = new RoverPosition(x, y, direction);
+        this.currentPosition = new RoverPosition(x, y, direction);
 
     }
 
-    public String move(char[] moveCommand) {
+    public RoverPosition move(char[] moveCommand) {
         for (char c : moveCommand) {
             if (c == 'R') {
                 turnRight();
@@ -27,77 +24,76 @@ public class MarsRover {
             }
         }
 
-        String finalX = Integer.toString(this.currentPosition.x);
-        String finalY = Integer.toString(this.currentPosition.y);
-        return (finalX + finalY + this.direction);
+        return currentPosition;
     }
 
     private void moveBackward() {
-        switch (direction) {
+        switch (currentPosition.getDirection()) {
             case 'N':
-                currentPosition.y--;
+                currentPosition.setY(currentPosition.getY() - 1);
                 break;
             case 'W':
-                currentPosition.x++;
+                currentPosition.setX(currentPosition.getX() + 1);
                 break;
             case 'S':
-                currentPosition.y++;
+                currentPosition.setY(currentPosition.getY() + 1);
                 break;
             case 'E':
-                currentPosition.x--;
+                currentPosition.setX(currentPosition.getX() - 1);
                 break;
         }
     }
 
     private void moveForward() {
-        switch (direction) {
+        switch (currentPosition.getDirection()) {
             case 'N':
-                currentPosition.y++;
+                currentPosition.setY(currentPosition.getY() + 1);
                 break;
             case 'W':
-                currentPosition.x--;
+                currentPosition.setX(currentPosition.getX() - 1);
                 break;
             case 'S':
-                currentPosition.y--;
+                currentPosition.setY(currentPosition.getY() - 1);
                 break;
             case 'E':
-                currentPosition.x++;
+                currentPosition.setX(currentPosition.getX() + 1);
                 break;
         }
     }
 
     private void turnLeft() {
-        switch (direction) {
+
+        switch (currentPosition.getDirection()) {
             case 'N':
-                this.direction = 'W';
+                currentPosition.setDirection('W');
                 break;
             case 'W':
-                this.direction = 'S';
+                currentPosition.setDirection('S');
                 break;
             case 'S':
-                this.direction = 'E';
+                currentPosition.setDirection('E');
                 break;
             case 'E':
-                this.direction = 'N';
+                currentPosition.setDirection('N');
                 break;
         }
     }
 
     private void turnRight() {
-        switch (direction) {
+        switch (currentPosition.getDirection()) {
             case 'N':
-                this.direction = 'E';
-                break;
-            case 'E':
-                this.direction = 'S';
-                break;
-            case 'S':
-                this.direction = 'W';
+                currentPosition.setDirection('E');
                 break;
             case 'W':
-                this.direction = 'N';
+                currentPosition.setDirection('N');
+                break;
+            case 'S':
+                currentPosition.setDirection('W');
+                break;
+            case 'E':
+                currentPosition.setDirection('S');
                 break;
         }
     }
-}
 
+}

@@ -8,6 +8,7 @@
 2. The rover receives a character array of commands.
 3. Implement commands that move the rover forward/backward (f,b).
 4. Implement commands that turn the rover left/right (l,r).
+MoveForward Assumptions: North increases y, South decreases y, West increases x and East increases x
 5. Implement wrapping at edges. But be careful, planets are spheres.
 ???Spheres do not have edges. Use the circumference to change direction????
 
