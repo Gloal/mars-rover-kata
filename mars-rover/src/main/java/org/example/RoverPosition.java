@@ -6,6 +6,9 @@ public class RoverPosition {
     private char direction;
 
     public RoverPosition(int x, int y, char direction) {
+        if (!isValidDirection(direction)) {
+            throw new IllegalArgumentException("Invalid direction character; please enter a valid direction");
+        }
         this.x = x;
         this.y = y;
         this.direction = direction;
