@@ -31,7 +31,7 @@ public class MarsRoverTest {
             "0RLRLRLRL, 0,0,N"
     })
     void move_LeftOrRightFromNorth_ShouldReturnCorrectFinalDirection(String directions, int expectedXLocation, int expectedYLocation, char expectedDirection) {
-        RoverPosition actualPosition = rover.move(directions.toCharArray());
+        RoverPosition actualPosition = rover.move(directions);
         assertEquals(new RoverPosition(expectedXLocation,expectedYLocation,expectedDirection).toString(), actualPosition.toString());
     }
 
@@ -44,14 +44,14 @@ public class MarsRoverTest {
     })
     void move_LeftAndRightFromEast_ShouldReturnCorrectFinalDirection(String directions, int expectedXLocation, int expectedYLocation, char expectedDirection) {
         rover = new MarsRover(0, 0, 'E');
-        RoverPosition actualPosition = rover.move(directions.toCharArray());
+        RoverPosition actualPosition = rover.move(directions);
         assertEquals(new RoverPosition(expectedXLocation,expectedYLocation,expectedDirection).toString(), actualPosition.toString());
     }
 
     @Test
     void move_ConsecutiveForwardOrBackward_ShouldReturnCorrectFinalDirection() {
-        assertEquals(new RoverPosition(0,2,'N').toString(), rover.move(new char[]{'F', 'F'}).toString());
-        assertEquals(new RoverPosition(0,2,'N').toString(), rover.move(new char[]{'B', 'F'}).toString());
+        assertEquals(new RoverPosition(0,2,'N').toString(), rover.move("FF").toString());
+        assertEquals(new RoverPosition(0,2,'N').toString(), rover.move("BF").toString());
     }
 
     @ParameterizedTest
@@ -69,14 +69,26 @@ public class MarsRoverTest {
             "RFLRLRLRLR, 1,0,E",
     })
     void move_LeftOrRightAndForwardOrBackward_shouldReturnCorrectPositionAndDirection(String directions, int expectedXLocation, int expectedYLocation, char expectedDirection) {
-        RoverPosition actualPosition = rover.move(directions.toCharArray());
+        RoverPosition actualPosition = rover.move(directions);
         assertEquals(new RoverPosition(expectedXLocation,expectedYLocation,expectedDirection).toString(), actualPosition.toString());
     }
 
     @Test
     void move_ConsecutiveMoveDirections_shouldReturnCorrectPosition() {
-        assertEquals(new RoverPosition(0,2,'S').toString(), rover.move(new char[]{'F', 'F','L','L'}).toString());
-        assertEquals(new RoverPosition(0,2,'S').toString(), rover.move(new char[]{'B', 'F', 'R', 'L'}).toString());
+        assertEquals(new RoverPosition(0,2,'S').toString(), rover.move("FFLL").toString());
+        assertEquals(new RoverPosition(0,2,'S').toString(), rover.move("BFRL").toString());
     }
+
+
+    @ParameterizedTest
+    @CsvSource({
+            " ,0,-1,N",
+            ", 5,0,W"
+    })
+    void move_NullMoveCommand_shouldReturnNullPointerException(String directions, int expectedXLocation, int expectedYLocation, char expectedDirection) {
+        NullPointerException ex = assertThrows(NullPointerException.class, () -> rover.move(directions));
+        assertEquals("Move command cannot be null; please enter valid command", ex.getMessage());
+    }
+
 
 }

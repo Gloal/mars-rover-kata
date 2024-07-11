@@ -18,4 +18,5 @@ class RoverPositionTest {
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> new RoverPosition(1,2,'b'));
         assertEquals("Invalid direction character; please enter a valid direction", ex.getMessage());
     }
+
 }

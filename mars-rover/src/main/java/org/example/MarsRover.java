@@ -6,13 +6,23 @@ public class MarsRover {
     private final RoverPosition currentPosition;
 
     public MarsRover(int x, int y, char direction) {
+        if(!isValidDirection(direction)){
+            throw new IllegalArgumentException("Invalid direction");
+        }
         this.initialPosition = new RoverPosition(x, y, direction);
         this.currentPosition = new RoverPosition(x, y, direction);
 
     }
 
-    public RoverPosition move(char[] moveCommand) {
-        for (char c : moveCommand) {
+    private boolean isValidDirection(char direction) {
+        return direction == 'N' || direction == 'E' || direction == 'S' || direction == 'W';
+    }
+
+    public RoverPosition move(String moveCommand) {
+        if(moveCommand == null){
+            throw new NullPointerException("Move command cannot be null; please enter valid command");
+        }
+        for (char c : moveCommand.toCharArray()) {
             if (c == 'R') {
                 turnRight();
             } else if (c == 'L') {
