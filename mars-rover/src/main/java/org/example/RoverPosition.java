@@ -10,7 +10,7 @@ public class RoverPosition {
             throw new IllegalArgumentException("Invalid direction character; please enter a valid direction");
         }
 
-        if(x > MarsTerrain.MAX_X || x < -MarsTerrain.MAX_X || y > MarsTerrain.MAX_Y || y < -MarsTerrain.MAX_Y){
+        if (x > MarsTerrain.MAX_X || x < -MarsTerrain.MAX_X || y > MarsTerrain.MAX_Y || y < -MarsTerrain.MAX_Y) {
             throw new IllegalArgumentException("Invalid coordinates");
         }
 
@@ -52,7 +52,7 @@ public class RoverPosition {
 
     @Override
     public String toString() {
-        return x + "," + y +","+ direction;
+        return x + "," + y + "," + direction;
     }
 }
 

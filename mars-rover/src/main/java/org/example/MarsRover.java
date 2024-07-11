@@ -6,11 +6,11 @@ public class MarsRover {
     private final RoverPosition currentPosition;
 
     public MarsRover(int x, int y, char direction) {
-        if(!isValidDirection(direction)){
+        if (!isValidDirection(direction)) {
             throw new IllegalArgumentException("Invalid direction");
         }
 
-        if(x > MarsTerrain.MAX_X || x < -MarsTerrain.MAX_X || y > MarsTerrain.MAX_Y || y < -MarsTerrain.MAX_Y){
+        if (x > MarsTerrain.MAX_X || x < -MarsTerrain.MAX_X || y > MarsTerrain.MAX_Y || y < -MarsTerrain.MAX_Y) {
             throw new IllegalArgumentException("Invalid coordinates");
         }
 
@@ -24,7 +24,7 @@ public class MarsRover {
     }
 
     public RoverPosition move(String moveCommand) {
-        if(moveCommand == null){
+        if (moveCommand == null) {
             throw new NullPointerException("Move command cannot be null; please enter valid command");
         }
         for (char c : moveCommand.toCharArray()) {
@@ -36,8 +36,8 @@ public class MarsRover {
                 moveForward();
             } else if (c == 'B') {
                 moveBackward();
-            }else{
-                throw new IllegalArgumentException("Invalid move command: "+c);
+            } else {
+                throw new IllegalArgumentException("Invalid move command: " + c);
             }
         }
         return currentPosition;
