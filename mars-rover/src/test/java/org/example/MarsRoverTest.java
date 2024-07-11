@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MarsRoverTest {
@@ -88,6 +90,17 @@ public class MarsRoverTest {
     void move_NullMoveCommand_shouldReturnNullPointerException(String directions, int expectedXLocation, int expectedYLocation, char expectedDirection) {
         NullPointerException ex = assertThrows(NullPointerException.class, () -> rover.move(directions));
         assertEquals("Move command cannot be null; please enter valid command", ex.getMessage());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "FFJFF ,0,-1,N",
+            "7, 5,0,W",
+            "L- , 0,0,N"
+    })
+    void move_InvalidMoveCommand_shouldReturnIllegalArgumentException(String directions, int expectedXLocation, int expectedYLocation, char expectedDirection) {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> rover.move(directions));
+        assertThat (ex.getMessage(), containsString("Invalid move command: "));
     }
 
 

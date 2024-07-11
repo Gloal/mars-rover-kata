@@ -31,6 +31,8 @@ public class MarsRover {
                 moveForward();
             } else if (c == 'B') {
                 moveBackward();
+            }else{
+                throw new IllegalArgumentException("Invalid move command: "+c);
             }
         }
 
