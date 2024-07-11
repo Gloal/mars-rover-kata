@@ -19,18 +19,18 @@ public class MarsRoverTest {
 
     @ParameterizedTest
     @CsvSource({
-            "0L, 0,0,W",
-            "0R, 0,0,E",
-            "0LL, 0,0,S",
-            "0LLLLLLL, 0,0,E",
-            "0LLLLLLLL, 0,0,N",
-            "0RRRR, 0,0,N",
-            "0RR, 0,0,S",
-            "0RRR, 0,0,W",
-            "0RRRRRRR, 0,0,W",
-            "0RLRLRLRLR, 0,0,E",
-            "0RLRLRLRLRLLLL, 0,0,E",
-            "0RLRLRLRL, 0,0,N"
+            "L, 0,0,W",
+            "R, 0,0,E",
+            "LL, 0,0,S",
+            "LLLLLLL, 0,0,E",
+            "LLLLLLLL, 0,0,N",
+            "RRRR, 0,0,N",
+            "RR, 0,0,S",
+            "RRR, 0,0,W",
+            "RRRRRRR, 0,0,W",
+            "RLRLRLRLR, 0,0,E",
+            "RLRLRLRLRLLLL, 0,0,E",
+            "RLRLRLRL, 0,0,N"
     })
     void move_LeftOrRightFromNorth_ShouldReturnCorrectFinalDirection(String directions, int expectedXLocation, int expectedYLocation, char expectedDirection) {
         RoverPosition actualPosition = rover.move(directions);
@@ -39,10 +39,9 @@ public class MarsRoverTest {
 
     @ParameterizedTest
     @CsvSource({
-            "0L, 0,0,N",
-            "0R, 0,0,S",
-            "0LL, 0,0,W",
-
+            "L, 0,0,N",
+            "R, 0,0,S",
+            "LL, 0,0,W",
     })
     void move_LeftAndRightFromEast_ShouldReturnCorrectFinalDirection(String directions, int expectedXLocation, int expectedYLocation, char expectedDirection) {
         rover = new MarsRover(0, 0, 'E');
@@ -81,7 +80,6 @@ public class MarsRoverTest {
         assertEquals(new RoverPosition(0,2,'S').toString(), rover.move("BFRL").toString());
     }
 
-
     @ParameterizedTest
     @CsvSource({
             " ,0,-1,N",
@@ -108,6 +106,4 @@ public class MarsRoverTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new MarsRover(0, 0, 'X'));
         assertEquals("Invalid direction", exception.getMessage());
     }
-
-
 }
