@@ -103,5 +103,11 @@ public class MarsRoverTest {
         assertThat (ex.getMessage(), containsString("Invalid move command: "));
     }
 
+    @Test
+    void throwsException_WhenGivenInvalidInitialDirection() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new MarsRover(0, 0, 'X'));
+        assertEquals("Invalid direction", exception.getMessage());
+    }
+
 
 }
