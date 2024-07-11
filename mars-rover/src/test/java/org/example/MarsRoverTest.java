@@ -103,7 +103,27 @@ public class MarsRoverTest {
 
     @Test
     void throwsException_WhenGivenInvalidInitialDirection() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new MarsRover(0, 0, 'X'));
-        assertEquals("Invalid direction", exception.getMessage());
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> new MarsRover(0, 0, 'X'));
+        assertEquals("Invalid direction", ex.getMessage());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "-111,1,N",
+            "111,0,W",
+    })
+    void move_InvalidXCoordinates_shouldReturnIllegalArgumentException(int initalXCoordinate, int initalYCoordinate, char initialDirection) {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> new MarsRover(initalXCoordinate, initalYCoordinate, initialDirection));
+        assertEquals("Invalid coordinates", ex.getMessage());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1,-111,N",
+            "90, 111, W",
+    })
+    void move_InvalidYCoordinates_shouldReturnIllegalArgumentException(int initalXCoordinate, int initalYCoordinate, char initialDirection) {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> new MarsRover(initalXCoordinate, initalYCoordinate, initialDirection));
+        assertEquals("Invalid coordinates", ex.getMessage());
     }
 }
