@@ -9,6 +9,11 @@ public class RoverPosition {
         if (!isValidDirection(direction)) {
             throw new IllegalArgumentException("Invalid direction character; please enter a valid direction");
         }
+
+        if(x > MarsTerrain.MAX_X || x < -MarsTerrain.MAX_X || y > MarsTerrain.MAX_Y || y < -MarsTerrain.MAX_Y){
+            throw new IllegalArgumentException("Invalid coordinates");
+        }
+
         this.x = x;
         this.y = y;
         this.direction = direction;
