@@ -1,10 +1,10 @@
 package org.example;
 
-public class Position {
+public class Coordinate {
     int y;
     int x;
 
-    public Position(int x, int y){
+    public Coordinate(int x, int y){
         this.x = x;
         this.y = y;
     }
