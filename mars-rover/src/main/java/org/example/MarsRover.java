@@ -43,19 +43,29 @@ public class MarsRover {
         return currentPosition;
     }
 
+    private int wrapCoordinate(int coordinate, int maxCoordinate){
+        if(coordinate < -maxCoordinate){
+            return maxCoordinate;
+        }else if (coordinate > maxCoordinate){
+            return -maxCoordinate;
+        }else {
+            return coordinate;
+        }
+    }
+
     private void moveBackward() {
         switch (currentPosition.getDirection()) {
             case 'N':
-                currentPosition.setY(currentPosition.getY() - 1);
+                currentPosition.setY(wrapCoordinate(currentPosition.getY() - 1, MarsTerrain.MAX_Y));
                 break;
             case 'W':
-                currentPosition.setX(currentPosition.getX() + 1);
+                currentPosition.setX(wrapCoordinate(currentPosition.getX() + 1, MarsTerrain.MAX_X));
                 break;
             case 'S':
-                currentPosition.setY(currentPosition.getY() + 1);
+                currentPosition.setY(wrapCoordinate(currentPosition.getY() + 1, MarsTerrain.MAX_Y));
                 break;
             case 'E':
-                currentPosition.setX(currentPosition.getX() - 1);
+                currentPosition.setX(wrapCoordinate(currentPosition.getX() - 1, MarsTerrain.MAX_X));
                 break;
         }
     }
@@ -63,16 +73,16 @@ public class MarsRover {
     private void moveForward() {
         switch (currentPosition.getDirection()) {
             case 'N':
-                currentPosition.setY(currentPosition.getY() + 1);
+                currentPosition.setY(wrapCoordinate(currentPosition.getY() + 1, MarsTerrain.MAX_Y));
                 break;
             case 'W':
-                currentPosition.setX(currentPosition.getX() - 1);
+                currentPosition.setX(wrapCoordinate(currentPosition.getX() - 1, MarsTerrain.MAX_X));
                 break;
             case 'S':
-                currentPosition.setY(currentPosition.getY() - 1);
+                currentPosition.setY(wrapCoordinate(currentPosition.getY() - 1, MarsTerrain.MAX_Y));
                 break;
             case 'E':
-                currentPosition.setX(currentPosition.getX() + 1);
+                currentPosition.setX(wrapCoordinate(currentPosition.getX() + 1, MarsTerrain.MAX_X));
                 break;
         }
     }

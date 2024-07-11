@@ -112,8 +112,8 @@ public class MarsRoverTest {
             "-111,1,N",
             "111,0,W",
     })
-    void move_InvalidXCoordinates_shouldReturnIllegalArgumentException(int initalXCoordinate, int initalYCoordinate, char initialDirection) {
-        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> new MarsRover(initalXCoordinate, initalYCoordinate, initialDirection));
+    void move_InvalidXCoordinates_shouldReturnIllegalArgumentException(int initialXCoordinate, int initialYCoordinate, char initialDirection) {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> new MarsRover(initialXCoordinate, initialYCoordinate, initialDirection));
         assertEquals("Invalid coordinates", ex.getMessage());
     }
 
@@ -122,8 +122,30 @@ public class MarsRoverTest {
             "1,-111,N",
             "90, 111, W",
     })
-    void move_InvalidYCoordinates_shouldReturnIllegalArgumentException(int initalXCoordinate, int initalYCoordinate, char initialDirection) {
-        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> new MarsRover(initalXCoordinate, initalYCoordinate, initialDirection));
+    void move_InvalidYCoordinates_shouldReturnIllegalArgumentException(int initialXCoordinate, int initialYCoordinate, char initialDirection) {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> new MarsRover(initialXCoordinate, initialYCoordinate, initialDirection));
         assertEquals("Invalid coordinates", ex.getMessage());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "FF,-100,0,E",
+            "LLBBBBB, -97,0,W",
+    })
+    void move_WrapXCoordinates_shouldReturnWrappedPosition(String directions, int expectedXLocation, int expectedYLocation, char expectedDirection) {
+        rover = new MarsRover(99, 0, 'E');
+        RoverPosition actualPosition = rover.move(directions);
+        assertEquals(new RoverPosition(expectedXLocation,expectedYLocation,expectedDirection).toString(), actualPosition.toString());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "FF,0,-100,N",
+            "LLBBBBB, 0,-97,S",
+    })
+    void move_WrapYCoordinates_shouldReturnWrappedPosition(String directions, int expectedXLocation, int expectedYLocation, char expectedDirection) {
+        rover = new MarsRover(0, 99, 'N');
+        RoverPosition actualPosition = rover.move(directions);
+        assertEquals(new RoverPosition(expectedXLocation,expectedYLocation,expectedDirection).toString(), actualPosition.toString());
     }
 }
